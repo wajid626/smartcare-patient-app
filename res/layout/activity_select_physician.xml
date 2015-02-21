@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+	<TextView
+        android:id="@+id/lblBenefit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="@string/choose_a_physician"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	<TextView
+	    android:id="@+id/lblLocation"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/lblBenefit"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginTop="17dp"
+	    android:text="TextView" />
+
+	<RadioGroup
+        android:id="@+id/radioGroupBenefit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblLocation"
+        android:layout_marginTop="23dp"
+        android:orientation="vertical" >
+
+        <RadioButton
+            android:id="@+id/radioButtonJeff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:text="@string/jeff" />
+
+        <RadioButton
+            android:id="@+id/radioButtonLisa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/lisa" />
+
+        <RadioButton
+            android:id="@+id/radioButtonFrank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/frank" />
+
+        <RadioButton
+            android:id="@+id/radioButtonTom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/tom" />
+        
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/next" />
+	
+</RelativeLayout>
