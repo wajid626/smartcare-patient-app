@@ -64,6 +64,10 @@ public class MainActivity extends ActivityBase {
             Toast.makeText(this, "Option2", Toast.LENGTH_SHORT).show();
            // setContentView(R.layout.carddetails);
             return true;  
+        case R.id.item3:
+            Toast.makeText(this, "Option3", Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.activity_heartrate_monitor);
+            return true; 
         default:
           return super.onOptionsItemSelected(item);
         } 

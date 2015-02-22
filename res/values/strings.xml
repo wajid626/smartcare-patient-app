@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Android_Test</string>
+    <string name="app_name">SmartCare</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_select_location">Select Location</string>
     <string name="title_activity_select_benefit">Select Benefit</string>
@@ -12,5 +12,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_select_slot">SelectSlotActivity</string>
     <string name="title_activity_my_appointments">MyAppointmentsActivity</string>
+    <string name="hello">HeartRate Monitor</string>
+    <string name="labelHeartRate">000</string>
+    <string name="labelStatusMsg"></string>
 
 </resources>

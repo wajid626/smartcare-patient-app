@@ -21,7 +21,7 @@ public class SignInActivity extends ActivityBase {
         setContentView(R.layout.activity_sign_in);
         super.onCreate(savedInstanceState);
         
-        String username = getPreferences(MODE_PRIVATE).getString("username", "user.name@globant.com");
+        String username = getPreferences(MODE_PRIVATE).getString("username", "wajid");
         txtUsername.setText(username);
 		
     }

@@ -10,6 +10,9 @@
     <!-- <uses-permission android:name="android.permission.READ_CALENDAR" /> -->
     <!-- <uses-permission android:name="android.permission.WRITE_CALENDAR" /> -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name="com.smartcare.bookings.SmartCareBookingsApplication"
@@ -39,6 +42,12 @@
         </activity>
         <activity
             android:name="com.smartcare.bookings.activities.MainActivity"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.smartcare.bookings.activities.HeartRateMonitorActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
             </intent-filter>
