@@ -40,6 +40,12 @@
             <intent-filter>
             </intent-filter>
         </activity>
+         <activity
+            android:name="com.smartcare.bookings.activities.Preferences"
+            android:label="preferences" >
+            <intent-filter>
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.smartcare.bookings.activities.MainActivity"
             android:label="@string/title_activity_main" >

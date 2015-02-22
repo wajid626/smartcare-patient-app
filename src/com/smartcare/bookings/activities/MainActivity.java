@@ -59,6 +59,8 @@ public class MainActivity extends ActivityBase {
         case R.id.item1:
           Toast.makeText(this, "Option1", Toast.LENGTH_SHORT).show();
           setContentView(R.layout.preferences);
+          Intent intent = new Intent(this, Preferences.class);
+          startActivity(intent);
           return true;
         case R.id.item2:
             Toast.makeText(this, "Option2", Toast.LENGTH_SHORT).show();
@@ -67,6 +69,8 @@ public class MainActivity extends ActivityBase {
         case R.id.item3:
             Toast.makeText(this, "Option3", Toast.LENGTH_SHORT).show();
             setContentView(R.layout.activity_heartrate_monitor);
+            Intent inent = new Intent(this, HeartRateMonitorActivity.class);
+            startActivity(inent);
             return true; 
         default:
           return super.onOptionsItemSelected(item);
