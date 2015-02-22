@@ -30,4 +30,12 @@
         android:layout_marginTop="17dp"
         android:text="@string/available_turns" />
 
+     <Button
+        android:id="@+id/btnMakePayment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnAvailableAppointments"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:text="@string/make_payment" />
 </RelativeLayout>

@@ -15,37 +15,38 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int btnAccept=0x7f070017;
+        public static final int btnAccept=0x7f070018;
         public static final int btnAvailableAppointments=0x7f070002;
+        public static final int btnMakePayment=0x7f070003;
         public static final int btnMyAppointments=0x7f070001;
-        public static final int btnNext=0x7f07000a;
-        public static final int chk_checkin=0x7f070018;
-        public static final int chk_pacemaker=0x7f07001a;
-        public static final int chk_payments=0x7f070019;
-        public static final int item1=0x7f07001d;
-        public static final int item2=0x7f07001e;
-        public static final int lbl=0x7f070011;
-        public static final int lblBenefit=0x7f07000b;
-        public static final int lblLocation=0x7f070004;
+        public static final int btnNext=0x7f07000b;
+        public static final int chk_checkin=0x7f070019;
+        public static final int chk_pacemaker=0x7f07001b;
+        public static final int chk_payments=0x7f07001a;
+        public static final int item1=0x7f07001e;
+        public static final int item2=0x7f07001f;
+        public static final int lbl=0x7f070012;
+        public static final int lblBenefit=0x7f07000c;
+        public static final int lblLocation=0x7f070005;
         public static final int lblLoggedInAs=0x7f070000;
-        public static final int lblSignInWith=0x7f070014;
-        public static final int lblTitle=0x7f070013;
-        public static final int lstAppointments=0x7f070003;
-        public static final int lstTurns=0x7f070012;
-        public static final int menu_settings=0x7f07001c;
-        public static final int radioButtonFrank=0x7f07000f;
-        public static final int radioButtonJeff=0x7f07000d;
-        public static final int radioButtonLisa=0x7f07000e;
-        public static final int radioButtonSanfrancisco=0x7f070009;
-        public static final int radioButtonSanjose=0x7f070006;
-        public static final int radioButtonSantaclara=0x7f070008;
-        public static final int radioButtonSunnyvale=0x7f070007;
-        public static final int radioButtonTom=0x7f070010;
-        public static final int radioGroupBenefit=0x7f07000c;
-        public static final int radioGroupLocation=0x7f070005;
-        public static final int savePreferences=0x7f07001b;
-        public static final int txtPassword=0x7f070016;
-        public static final int txtUsername=0x7f070015;
+        public static final int lblSignInWith=0x7f070015;
+        public static final int lblTitle=0x7f070014;
+        public static final int lstAppointments=0x7f070004;
+        public static final int lstTurns=0x7f070013;
+        public static final int menu_settings=0x7f07001d;
+        public static final int radioButtonFrank=0x7f070010;
+        public static final int radioButtonJeff=0x7f07000e;
+        public static final int radioButtonLisa=0x7f07000f;
+        public static final int radioButtonSanfrancisco=0x7f07000a;
+        public static final int radioButtonSanjose=0x7f070007;
+        public static final int radioButtonSantaclara=0x7f070009;
+        public static final int radioButtonSunnyvale=0x7f070008;
+        public static final int radioButtonTom=0x7f070011;
+        public static final int radioGroupBenefit=0x7f07000d;
+        public static final int radioGroupLocation=0x7f070006;
+        public static final int savePreferences=0x7f07001c;
+        public static final int txtPassword=0x7f070017;
+        public static final int txtUsername=0x7f070016;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -66,11 +67,11 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040000;
-        public static final int available_appointments=0x7f04001b;
+        public static final int available_appointments=0x7f04001c;
         public static final int available_turns=0x7f040016;
-        public static final int chk_checkin=0x7f040017;
-        public static final int chk_pacemaker=0x7f040019;
-        public static final int chk_payments=0x7f040018;
+        public static final int chk_checkin=0x7f040018;
+        public static final int chk_pacemaker=0x7f04001a;
+        public static final int chk_payments=0x7f040019;
         public static final int choose_a_location=0x7f04000c;
         public static final int choose_a_physician=0x7f04000d;
         public static final int frank=0x7f04000f;
@@ -78,11 +79,12 @@ public final class R {
         public static final int jeff=0x7f040012;
         public static final int lisa=0x7f040011;
         public static final int logged_in_as=0x7f040008;
+        public static final int make_payment=0x7f040017;
         public static final int menu_settings=0x7f040001;
         public static final int mobile=0x7f040006;
         public static final int my_appointments=0x7f040015;
         public static final int next=0x7f04000e;
-        public static final int savePreferences=0x7f04001a;
+        public static final int savePreferences=0x7f04001b;
         public static final int sign_in=0x7f040014;
         public static final int sign_in_with=0x7f040013;
         public static final int smartcare_bookings=0x7f040005;

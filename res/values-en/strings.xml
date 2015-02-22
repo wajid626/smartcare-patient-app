@@ -13,9 +13,10 @@
     <string name="sign_in">Sign In!</string>
     <string name="my_appointments">My Appointments</string>
     <string name="available_turns">Available Appointments</string>
+     <string name="make_payment">Make a Paypal Payment</string>
        <string name="chk_checkin">Automated Checkin</string>
     <string name="chk_payments">Payments via Beacons</string>
     <string name="chk_pacemaker">Enable pacemaker alerts</string>
      <string name="savePreferences">Save</string>
- 
+     
 </resources>
