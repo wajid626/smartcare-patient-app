@@ -63,12 +63,12 @@ public class NewConnectedListener extends ConnectListenerImpl
 					text1.setData(b1);
 					_aNewHandler.sendMessage(text1);
 					System.out.println("Heart Rate is "+ HRate);
-			    	RestClient rsClient = new RestClient("http://192.168.253.1:8080/smartcare-services/rest/UserService/updateHeartRate");
+			    	RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/UserService/updateHeartRate");
 
 					rsClient.addParam("patientName", "Wajid");
 	    			rsClient.addParam("heartBeatRate", String.valueOf(HRate) );
 	    			try {
-						rsClient.execute(RestClient.RequestMethod.POST);
+						rsClient.execute(RestClient.RequestMethod.GET);
 						System.out.println("-------------");
 						System.out.println(rsClient.getErrorMessage());
 						System.out.println(rsClient.getResponseCode());
