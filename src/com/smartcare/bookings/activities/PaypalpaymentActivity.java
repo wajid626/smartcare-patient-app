@@ -238,7 +238,7 @@ import java.util.Set;
    
 	    private PayPalOAuthScopes getOauthScopes() {
 	        /* create the set of required scopes
-	         * Note: see https://developer.paypal.com/docs/integration/direct/identity/attributes/ for mapping between the
+	          * Note: see https://developer.paypal.com/docs/integration/direct/identity/attributes/ for mapping between the
 	         * attributes you select for this app in the PayPal developer portal and the scopes required here.
 	         */
 	        Set<String> scopes = new HashSet<String>(
