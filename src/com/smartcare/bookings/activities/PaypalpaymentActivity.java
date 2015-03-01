@@ -235,7 +235,7 @@ import java.util.Set;
 
 	        startActivityForResult(intent, REQUEST_CODE_PROFILE_SHARING);
 	    }*/
- 
+   
 	    private PayPalOAuthScopes getOauthScopes() {
 	        /* create the set of required scopes
 	         * Note: see https://developer.paypal.com/docs/integration/direct/identity/attributes/ for mapping between the
