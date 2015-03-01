@@ -234,7 +234,7 @@ import java.util.Set;
 	        intent.putExtra(PayPalProfileSharingActivity.EXTRA_REQUESTED_SCOPES, getOauthScopes());
 
 	        startActivityForResult(intent, REQUEST_CODE_PROFILE_SHARING);
-	    }*/
+	     }*/
    
 	    private PayPalOAuthScopes getOauthScopes() {
 	        /* create the set of required scopes
