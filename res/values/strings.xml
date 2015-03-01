@@ -14,6 +14,8 @@
     <string name="title_activity_my_appointments">MyAppointmentsActivity</string>
     <string name="hello">HeartRate Monitor</string>
     <string name="labelHeartRate">000</string>
-    <string name="labelStatusMsg"></string>
+    <string name="labelStatusMsg">status</string>
+     <string name="make_payment">MakePayment</string>
+    <string name= "title_activity_Paypal">PaypalPayment</string>
 
 </resources>
