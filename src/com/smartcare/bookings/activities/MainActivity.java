@@ -131,29 +131,29 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
 
 	@Override
 	public void didDepart(Visit visit) {
-		 Log.i("wajid", "wajid1239");
 		logMessage("Invoking didDepart method : " + visit.getTransmitter().getIdentifier());
 	}
 
 	@Override
 	public void receivedSighting(Visit visit, Date date, Integer rssi) {
-		 Log.i("wajid", "wajid12310");
 		logMessage("Invoking receivedSighting : " + visit.getTransmitter().getIdentifier() + " Proximity : " + rssi);
 	}
 
 	@Override
 	public void serviceStarted() {
-		 Log.i("wajid", "wajid12311");
 		logMessage("Invoking serviceStarted");
 	}
 
 	@Override
 	public void startServiceFailed(int arg0, String arg1) {
 		//logMessage("Invoking startServiceFailed");
-		 Log.i("wajid", "wajid12312");
 	}
 	private void logMessage(String msg) {
 		
 		   
+	}
+	
+	@Override
+	public void onBackPressed() {
 	}
 }
