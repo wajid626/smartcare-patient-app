@@ -33,7 +33,7 @@ public class HeartRateMonitorActivity extends Activity {
 	private final int HEART_RATE = 0x100;
 	private final int INSTANT_SPEED = 0x101;
 	
-	
+	   
 	
 	
 	
