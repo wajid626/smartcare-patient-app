@@ -243,7 +243,7 @@ import java.util.Set;
 	         */
 	        Set<String> scopes = new HashSet<String>(
 	                Arrays.asList(PayPalOAuthScopes.PAYPAL_SCOPE_EMAIL, PayPalOAuthScopes.PAYPAL_SCOPE_ADDRESS) );
-	        return new PayPalOAuthScopes(scopes);
+	        return new PayPalOAuthScopes(scopes); 
 	    }
 
 	    @Override
