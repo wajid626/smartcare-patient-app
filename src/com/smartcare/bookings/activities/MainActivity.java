@@ -30,7 +30,7 @@ import com.smartcare.bookings.SmartCareBookingsApplication;
 public class MainActivity extends ActivityBase implements ProximityListener, VisitListener{
 	private final Context context = this;
 	private TextView lblLoggedInAs;
-	private Button btnMyAppointments, btnAvailableAppointments;
+	private Button btnMyAppointments, btnAvailableAppointments, btnPaypalpayment;
 	private static final String PROXIMITY_APP_ID = "0e7b20b165e3a495d199249915365f28d81a0a0a669f55834759001ebc5a8e91";
     private static final String PROXIMITY_APP_SECRET = "e16659d95bf6dcba77970c0d56a29c0822889d718d4eee630677ef8152939ca4";
     private StringBuffer sb = new StringBuffer();
@@ -75,6 +75,13 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
     	btnMyAppointments.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
         		Intent intent = new Intent(context, MyAppointmentsActivity.class);
+            	startActivity(intent);
+            	
+            }
+        });
+    	btnPaypalpayment.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+        		Intent intent = new Intent(context, PaypalpaymentActivity.class);
             	startActivity(intent);
             	
             }
