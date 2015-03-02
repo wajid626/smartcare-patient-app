@@ -75,6 +75,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+
+            android:name="com.smartcare.bookings.activities.PaypalpaymentActivity"
+
+            android:label="@string/make_payment" >
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+
+        </activity>
                 <service
             android:name="com.gimbal.service.ProximityService" android:exported="false">
             <intent-filter>
