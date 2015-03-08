@@ -15,7 +15,7 @@
 
     <Button
         android:id="@+id/btnMyAppointments"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -26,7 +26,7 @@
 
     <Button
         android:id="@+id/btnAvailableAppointments"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnMyAppointments"
         android:layout_centerHorizontal="true"
@@ -45,7 +45,7 @@
             <Button
            android:id="@+id/buyItBtn"
               
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnAvailableAppointments"
         android:layout_centerHorizontal="true"
