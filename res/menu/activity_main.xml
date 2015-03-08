@@ -1,4 +1,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/item1" android:title="Preferences"></item>
-    <item android:id="@+id/item3" android:title="HeartRateMonitor"></item>
+    <item android:id="@+id/item2" android:title="HeartRateMonitor"></item>
 </menu>
