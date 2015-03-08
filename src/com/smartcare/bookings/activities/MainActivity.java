@@ -62,6 +62,7 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
     	lblLoggedInAs = (TextView) findViewById(R.id.lblLoggedInAs);
     	btnMyAppointments = (Button) findViewById(R.id.btnMyAppointments);
     	btnAvailableAppointments = (Button) findViewById(R.id.btnAvailableAppointments);
+    	btnPaypalpayment = (Button) findViewById(R.id.btnMakePayment);
     }
     
     protected void setUiEventHandlers () {
