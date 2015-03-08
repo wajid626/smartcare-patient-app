@@ -2,6 +2,7 @@ package com.smartcare.bookings.activities;
 
 import com.smartcare.bookings.R;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -9,7 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
-public class Preferences extends Activity {
+public class PreferencesActivity extends Activity {
 
 	private CheckBox chkBeacons, chkPayments, chkPacemaker;
 	private Button btnDisplay;
@@ -33,7 +34,7 @@ public class Preferences extends Activity {
 			public void onClick(View v) {
 
 				if (((CheckBox) v).isChecked()) {
-					Toast.makeText(Preferences.this,
+					Toast.makeText(PreferencesActivity.this,
 							"Bro, try Android :)", Toast.LENGTH_LONG).show();
 				}
 
@@ -62,11 +63,17 @@ public class Preferences extends Activity {
 				result.append("\nPacemaker check :").append(
 						chkPacemaker.isChecked());
 
-				Toast.makeText(Preferences.this, result.toString(),
+				Toast.makeText(PreferencesActivity.this, result.toString(),
 						Toast.LENGTH_LONG).show();
 
 			}
 		});
 
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent intent = new Intent(PreferencesActivity.this, MainActivity.class);
+	    startActivity(intent);
 	}
 }

@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
          <activity
-            android:name="com.smartcare.bookings.activities.Preferences"
+            android:name="com.smartcare.bookings.activities.PreferencesActivity"
             android:label="preferences" >
             <intent-filter>
             </intent-filter>

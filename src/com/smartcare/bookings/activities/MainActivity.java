@@ -142,7 +142,7 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
         case R.id.item1:
          // Toast.makeText(this, "Option1", Toast.LENGTH_SHORT).show();
           setContentView(R.layout.preferences);
-          Intent intent = new Intent(this, Preferences.class);
+          Intent intent = new Intent(this, PreferencesActivity.class);
           startActivity(intent);
           return true;
         case R.id.item2:

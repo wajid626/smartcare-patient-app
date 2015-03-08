@@ -33,10 +33,6 @@ public class HeartRateMonitorActivity extends Activity {
 	private final int HEART_RATE = 0x100;
 	private final int INSTANT_SPEED = 0x101;
 	
-	   
-	
-	
-	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -215,7 +211,13 @@ public class HeartRateMonitorActivity extends Activity {
     	}
 
     };
+
     
+	@Override
+	public void onBackPressed() {
+		Intent intent = new Intent(HeartRateMonitorActivity.this, MainActivity.class);
+	    startActivity(intent);
+	}
 }
 
 
