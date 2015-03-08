@@ -1,10 +1,20 @@
 package com.smartcare.bookings.activities;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -26,6 +36,20 @@ import com.gimbal.proximity.VisitListener;
 import com.gimbal.proximity.VisitManager;
 import com.smartcare.bookings.R;
 import com.smartcare.bookings.SmartCareBookingsApplication;
+import com.paypal.android.sdk.payments.PayPalAuthorization;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalFuturePaymentActivity;
+import com.paypal.android.sdk.payments.PayPalItem;
+import com.paypal.android.sdk.payments.PayPalOAuthScopes;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalPaymentDetails;
+import com.paypal.android.sdk.payments.PayPalProfileSharingActivity;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
+import com.paypal.android.sdk.payments.ShippingAddress;
+import com.smartcare.bookings.R;
+import com.smartcare.bookings.rest.*;
 
 public class MainActivity extends ActivityBase implements ProximityListener, VisitListener{
 	private final Context context = this;
@@ -34,9 +58,24 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
 	private static final String PROXIMITY_APP_ID = "0e7b20b165e3a495d199249915365f28d81a0a0a669f55834759001ebc5a8e91";
     private static final String PROXIMITY_APP_SECRET = "e16659d95bf6dcba77970c0d56a29c0822889d718d4eee630677ef8152939ca4";
     private StringBuffer sb = new StringBuffer();
-    
-
     private  VisitManager visitManager = null;
+    private static final String TAG = "paymentExample";
+    private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_SANDBOX;
+    public String patientName=null;
+    double billedAmount=0;
+    private static final int REQUEST_CODE_PAYMENT = 1;
+    private static final int REQUEST_CODE_FUTURE_PAYMENT = 2;
+    private static final int REQUEST_CODE_PROFILE_SHARING = 3;
+    private static final String CONFIG_CLIENT_ID ="AfSxvU77TJyalxLi9n28h-EQRY9YpBX5DqzJlkLnItQBKJtfkExnHtPvkEHa728-Trw-ffpnuCKjokmq";
+
+
+    private static PayPalConfiguration config = new PayPalConfiguration()
+            .environment(CONFIG_ENVIRONMENT)
+            .clientId(CONFIG_CLIENT_ID)
+            .merchantName("Pay my medical charges through Paypal")
+            .merchantPrivacyPolicyUri(Uri.parse("https://www.example.com/privacy"))
+            .merchantUserAgreementUri(Uri.parse("https://www.example.com/legal"));
+    
 	
     @SuppressLint("NewApi")
     @Override
@@ -55,6 +94,9 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
         options.setOption(ProximityOptions.VisitOptionSignalStrengthWindowKey, ProximityOptions.VisitOptionSignalStrengthWindowNone);
         visitManager.startWithOptions(options);
         startProximityService();
+        Intent intent = new Intent(this, PayPalService.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+        startService(intent);
 
     }
 
@@ -62,7 +104,7 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
     	lblLoggedInAs = (TextView) findViewById(R.id.lblLoggedInAs);
     	btnMyAppointments = (Button) findViewById(R.id.btnMyAppointments);
     	btnAvailableAppointments = (Button) findViewById(R.id.btnAvailableAppointments);
-    	btnPaypalpayment = (Button) findViewById(R.id.btnMakePayment);
+    	//btnPaypalpayment = (Button) findViewById(R.id.btnMakePayment);
     }
     
     protected void setUiEventHandlers () {
@@ -80,13 +122,14 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
             	
             }
         });
-    	btnPaypalpayment.setOnClickListener(new View.OnClickListener() {
+    /*	btnPaypalpayment.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
         		Intent intent = new Intent(context, PaypalpaymentActivity.class);
             	startActivity(intent);
             	
             }
         });
+    */
     }
     
     @Override
@@ -164,4 +207,243 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
 	@Override
 	public void onBackPressed() {
 	}
+	
+	   public void onBuyPressed(View pressed) {
+		   System.out.println("Buy is pressed ------------");
+	        PayPalPayment thingToBuy = getThingToBuy(PayPalPayment.PAYMENT_INTENT_SALE);
+	        Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
+	        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+	        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, thingToBuy);
+	        startActivityForResult(intent, REQUEST_CODE_PAYMENT);
+	        //Send post request to Pradeep's service
+	       // http://smartcare-services.elasticbeanstalk.com/rest/AdminService/makePayment?patientName=raje2&physicianName=Dr.%20Foo&billedAmount=25.0&paypalConfirmId=xxxxx
+	    }
+	   
+	    private PayPalPayment getThingToBuy(String paymentIntent) {
+	    	RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/AdminService/findPaymentDetails");
+			try {
+				rsClient.execute(RestClient.RequestMethod.GET);
+				System.out.println("-------------");
+				System.out.println(rsClient.getErrorMessage());
+				System.out.println(rsClient.getResponseCode());
+				System.out.println(rsClient.getResponse());
+				String responseArray =rsClient.getResponse();
+				 Log.i("Raje-Restclient", rsClient.getResponse().toString());
+				 
+				 JSONArray jArray = new JSONArray(rsClient.getResponse().toString());
+				 boolean flag=true;
+				 for (int i=0; i < jArray.length() && flag; i++)
+				 {
+				     try {
+				       //Parsing the Json array from the service response
+				    	 JSONObject json_data = jArray.getJSONObject(i);
+				          patientName =  json_data.getString("PatientName");
+				        billedAmount = json_data.getDouble("BilledAmount");
+				       //  patientName = oneObject.getString(patientName);
+				    	
+				    	 System.out.println("First   Billed amount = "+billedAmount);
+						 System.out.println("First   Patient Name = "+patientName);
+				     } catch (JSONException e) {
+				         // Oops
+				     }
+				 }
+				
+			 System.out.println("Billed amount = "+billedAmount);
+				 System.out.println("Patient Name = "+patientName);
+						 //toJSONObject().toString(4));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("Exception occurred");
+				e.printStackTrace();
+			}
+	       // return new PayPalPayment(new BigDecimal("10.75"), "USD", "My medical charges",
+	       //         paymentIntent);
+		return new PayPalPayment(new BigDecimal(billedAmount), "USD", "My medical charges",paymentIntent);
+	    }
+
+	    private void addAppProvidedShippingAddress(PayPalPayment paypalPayment) {
+	        ShippingAddress shippingAddress =
+	                new ShippingAddress().recipientName("Mom Parker").line1("52 North Main St.")
+	                        .city("Austin").state("TX").postalCode("78729").countryCode("US");
+	        paypalPayment.providedShippingAddress(shippingAddress);
+	    }
+	    
+	    /*
+	     * Enable retrieval of shipping addresses from buyer's PayPal account
+	     */
+	    private void enableShippingAddressRetrieval(PayPalPayment paypalPayment, boolean enable) {
+	        paypalPayment.enablePayPalShippingAddressesRetrieval(enable);
+	    }
+    
+	    private PayPalOAuthScopes getOauthScopes() {
+	        /* create the set of required scopes
+	          * Note: see https://developer.paypal.com/docs/integration/direct/identity/attributes/ for mapping between the
+	         * attributes you select for this app in the PayPal developer portal and the scopes required here.
+	         */
+	        Set<String> scopes = new HashSet<String>(
+	                Arrays.asList(PayPalOAuthScopes.PAYPAL_SCOPE_EMAIL, PayPalOAuthScopes.PAYPAL_SCOPE_ADDRESS) );
+	        return new PayPalOAuthScopes(scopes); 
+	    }
+
+	    @Override
+	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    	String paypalId;
+	        if (requestCode == REQUEST_CODE_PAYMENT) {
+	            if (resultCode == Activity.RESULT_OK) {
+	                PaymentConfirmation confirm =
+	                        data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+	                if (confirm != null) {
+	                    try {
+	                        Log.i("Raje", confirm.toJSONObject().toString(4));
+	                        System.out.println("The below confirmation id to be sent to our service");
+	                        System.out.println("Confirmation: State"+confirm.toJSONObject().getJSONObject("response").getString("state"));
+	                        System.out.println("Confirmation: State"+confirm.toJSONObject().getJSONObject("response").getString("id"));
+	                        paypalId =confirm.toJSONObject().getJSONObject("response").getString("id");
+	                        System.out.println("Final Paypal id = "+paypalId);
+	                        Log.i("Raje Paypal payment confirmation  ", paypalId);
+	                        // Call Pradeep's post request here
+	                       
+	            	        //Send post request to Pradeep's service
+	            	       // http://smartcare-services.elasticbeanstalk.com/rest/AdminService/makePayment?patientName=raje2&physicianName=Dr.%20Foo&billedAmount=25.0&paypalConfirmId=xxxxx
+	                       //ADDED HERE
+	                        
+	                      //  RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/AdminService/makePayment?patientName=raje2&physicianName=Dr.%20Foo&billedAmount=billedAmount&paypalConfirmId=paypalId");
+	                        RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/AdminService/makePayment?patientName=raje2&physicianName=Dr.%20Foo&billedAmount=25.0&paypalConfirmId=abcd");
+	            			
+	            			try {
+	            				rsClient.execute(RestClient.RequestMethod.GET);
+	            				String amt = new Double(billedAmount).toString();
+	            				 rsClient.addParam("patientName", patientName);
+	            				 rsClient.addParam("physicianName","Dr. Foo" );
+	            				
+	            				rsClient.addParam("billedAmount", amt);
+	            				rsClient.addParam("paypalId", paypalId);
+	            				
+	            				System.out.println("-------------");
+	            				System.out.println(rsClient.getErrorMessage());
+	            				System.out.println(rsClient.getResponseCode());
+	            				System.out.println(rsClient.getResponse());
+	            				String responseArray =rsClient.getResponse();
+	            				 Log.i("Raje-Restclient", rsClient.getResponse().toString());
+	            			}catch (Exception e) {
+	            				
+	            				
+	            			}
+	                        System.out.println(confirm.toJSONObject().toString(4));
+	                        Log.i("Raje", confirm.getPayment().toJSONObject().toString(4));
+	                        /**
+	                         *  TODO: send 'confirm' (and possibly confirm.getPayment() to your server for verification
+	                         * or consent completion.
+	                         * See https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
+	                         * for more details.
+	                         *
+	                         * For sample mobile backend interactions, see
+	                         * https://github.com/paypal/rest-api-sdk-python/tree/master/samples/mobile_backend
+	                         */
+	                        Toast.makeText(
+	                                getApplicationContext(),
+	                                "Payment confirmation received from PayPal", Toast.LENGTH_LONG)
+	                                .show();
+
+	                    } catch (JSONException e) {
+	                        Log.e(TAG, "an extremely unlikely failure occurred: ", e);
+	                    }
+	                }
+	            } else if (resultCode == Activity.RESULT_CANCELED) {
+	                Log.i(TAG, "The user canceled.");
+	            } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
+	                Log.i(
+	                        TAG,
+	                        "An invalid Payment or PayPalConfiguration was submitted. Please see the docs.");
+	            }
+	        } else if (requestCode == REQUEST_CODE_FUTURE_PAYMENT) {
+	            if (resultCode == Activity.RESULT_OK) {
+	                PayPalAuthorization auth =
+	                        data.getParcelableExtra(PayPalFuturePaymentActivity.EXTRA_RESULT_AUTHORIZATION);
+	                if (auth != null) {
+	                    try {
+	                        Log.i("FuturePaymentExample", auth.toJSONObject().toString(4));
+
+	                        String authorization_code = auth.getAuthorizationCode();
+	                        Log.i("FuturePaymentExample", authorization_code);
+
+	                        sendAuthorizationToServer(auth);
+	                        Toast.makeText(
+	                                getApplicationContext(),
+	                                "Future Payment code received from PayPal", Toast.LENGTH_LONG)
+	                                .show();
+
+	                    } catch (JSONException e) {
+	                        Log.e("FuturePaymentExample", "an extremely unlikely failure occurred: ", e);
+	                    }
+	                }
+	            } else if (resultCode == Activity.RESULT_CANCELED) {
+	                Log.i("FuturePaymentExample", "The user canceled.");
+	            } else if (resultCode == PayPalFuturePaymentActivity.RESULT_EXTRAS_INVALID) {
+	                Log.i(
+	                        "FuturePaymentExample",
+	                        "Probably the attempt to previously start the PayPalService had an invalid PayPalConfiguration. Please see the docs.");
+	            } 
+	        } else if (requestCode == REQUEST_CODE_PROFILE_SHARING) {
+	            if (resultCode == Activity.RESULT_OK) {
+	                PayPalAuthorization auth =
+	                        data.getParcelableExtra(PayPalProfileSharingActivity.EXTRA_RESULT_AUTHORIZATION);
+	                if (auth != null) {
+	                    try {
+	                        Log.i("ProfileSharingExample", auth.toJSONObject().toString(4));
+
+	                        String authorization_code = auth.getAuthorizationCode();
+	                        Log.i("ProfileSharingExample", authorization_code);
+
+	                        sendAuthorizationToServer(auth);
+	                        Toast.makeText(
+	                                getApplicationContext(),
+	                                "Profile Sharing code received from PayPal", Toast.LENGTH_LONG)
+	                                .show();
+
+	                    } catch (JSONException e) {
+	                        Log.e("ProfileSharingExample", "an extremely unlikely failure occurred: ", e);
+	                    }
+	                }
+	            } else if (resultCode == Activity.RESULT_CANCELED) {
+	                Log.i("ProfileSharingExample", "The user canceled.");
+	            } else if (resultCode == PayPalFuturePaymentActivity.RESULT_EXTRAS_INVALID) {
+	                Log.i(
+	                        "ProfileSharingExample",
+	                        "Probably the attempt to previously start the PayPalService had an invalid PayPalConfiguration. Please see the docs.");
+	            }
+	        }
+	    }
+
+	    private void sendAuthorizationToServer(PayPalAuthorization authorization) {
+
+	        /**
+	         * TODO: Send the authorization response to your server, where it can
+	         * exchange the authorization code for OAuth access and refresh tokens.
+	         * 
+	         * Your server must then store these tokens, so that your server code
+	         * can execute payments for this user in the future.
+	         * 
+	         * A more complete example that includes the required app-server to
+	         * PayPal-server integration is available from
+	         * https://github.com/paypal/rest-api-sdk-python/tree/master/samples/mobile_backend
+	         */
+
+	    }
+
+	    public void onFuturePaymentPurchasePressed(View pressed) {
+	        // Get the Client Metadata ID from the SDK
+	        String metadataId = PayPalConfiguration.getClientMetadataId(this);
+
+	        Log.i("FuturePaymentExample", "Client Metadata ID: " + metadataId);
+
+	        // TODO: Send metadataId and transaction details to your server for processing with
+	        // PayPal...
+	        Toast.makeText(
+	                getApplicationContext(), "Client Metadata Id received from SDK", Toast.LENGTH_LONG)
+	                .show();
+	    }
+
+
+
 }

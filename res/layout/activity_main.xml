@@ -33,15 +33,26 @@
         android:text="@string/available_turns"
          />
 
-     <Button
+   <!--   <Button
         android:id="@+id/btnMakePayment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnAvailableAppointments"
         android:layout_centerHorizontal="true"
         android:text="@string/make_payment" 
-        />
-
+        />-->
+     
+            <Button
+           android:id="@+id/buyItBtn"
+              
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnAvailableAppointments"
+        android:layout_centerHorizontal="true"
+        android:onClick="onBuyPressed"
+        android:text="@string/make_payment">
+                
+            </Button>
     <TextView
         android:id="@+id/beaconMsg"
         android:layout_below="@+id/btnMakePayment"

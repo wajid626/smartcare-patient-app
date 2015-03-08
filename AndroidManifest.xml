@@ -71,11 +71,11 @@
             android:label="@string/title_activity_my_appointments" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.smartcare.bookings.activities.PaypalpaymentActivity"
+        
+        
+       <!--   <activity android:name="com.smartcare.bookings.activities.PaypalpaymentActivity"
 
             android:label="@string/make_payment" >
 
@@ -85,7 +85,7 @@
 
             </intent-filter>
 
-        </activity>
+        </activity>-->
                 <service
             android:name="com.gimbal.service.ProximityService" android:exported="false">
             <intent-filter>
@@ -93,8 +93,7 @@
             </intent-filter>
         </service>
         
-                         <service android:name="com.paypal.android.sdk.payments.PayPalService"
-            android:exported="false" />
+         <service android:name="com.paypal.android.sdk.payments.PayPalService" android:exported="false" />
         
         <activity android:name="com.paypal.android.sdk.payments.PaymentActivity" />
         <activity android:name="com.paypal.android.sdk.payments.LoginActivity" />
