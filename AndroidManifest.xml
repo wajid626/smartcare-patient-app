@@ -75,9 +75,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-
-            android:name="com.smartcare.bookings.activities.PaypalpaymentActivity"
+        <activity android:name="com.smartcare.bookings.activities.PaypalpaymentActivity"
 
             android:label="@string/make_payment" >
 
@@ -94,6 +92,19 @@
                 <action android:name="com.example.proximityapp" />
             </intent-filter>
         </service>
+        
+                         <service android:name="com.paypal.android.sdk.payments.PayPalService"
+            android:exported="false" />
+        
+        <activity android:name="com.paypal.android.sdk.payments.PaymentActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.LoginActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.PaymentMethodActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.PaymentConfirmActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.PayPalFuturePaymentActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.FuturePaymentConsentActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.FuturePaymentInfoActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.PayPalProfileSharingActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.ProfileSharingConsentActivity" />
     </application>
 
 </manifest>
