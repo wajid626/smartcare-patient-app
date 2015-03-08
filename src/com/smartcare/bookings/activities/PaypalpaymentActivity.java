@@ -60,7 +60,7 @@ import java.util.Set;
 	    // note that these credentials will differ between live & sandbox environments.
 	   // private static final String CONFIG_CLIENT_ID = "credential from developer.paypal.com";
   private static final String CONFIG_CLIENT_ID ="AfSxvU77TJyalxLi9n28h-EQRY9YpBX5DqzJlkLnItQBKJtfkExnHtPvkEHa728-Trw-ffpnuCKjokmq";
-
+  public String patientName=null;  double billedAmount=0;
 
 	    private static final int REQUEST_CODE_PAYMENT = 1;
 	    private static final int REQUEST_CODE_FUTURE_PAYMENT = 2;
@@ -111,13 +111,16 @@ import java.util.Set;
 	        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, thingToBuy);
 
 	        startActivityForResult(intent, REQUEST_CODE_PAYMENT);
+	        //Send post request to Pradeep's service
+	       // http://smartcare-services.elasticbeanstalk.com/rest/AdminService/makePayment?patientName=raje2&physicianName=Dr.%20Foo&billedAmount=25.0&paypalConfirmId=xxxxx
 	    }
 	    
 	    private PayPalPayment getThingToBuy(String paymentIntent) {
 	    	//Call Payment service here to get the medical charges
-	    	
+	    	//return new PayPalPayment(new BigDecimal("10.75"), "USD", "My medical charges",
+	        //        paymentIntent);
 	    	//Added to consume services
-	    	String patientName=null;  double billedAmount=0;
+	    	//String patientName=null;  double billedAmount=0;
 	    
 	    	RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/AdminService/findPaymentDetails");
 
@@ -158,7 +161,7 @@ import java.util.Set;
 				     }
 				 }
 				
-				 System.out.println("Billed amount = "+billedAmount);
+			 System.out.println("Billed amount = "+billedAmount);
 				 System.out.println("Patient Name = "+patientName);
 						 //toJSONObject().toString(4));
 			} catch (Exception e) {
@@ -168,7 +171,7 @@ import java.util.Set;
 			}
 	       // return new PayPalPayment(new BigDecimal("10.75"), "USD", "My medical charges",
 	       //         paymentIntent);
-			return new PayPalPayment(new BigDecimal(billedAmount), "USD", "My medical charges",paymentIntent);
+		return new PayPalPayment(new BigDecimal(billedAmount), "USD", "My medical charges",paymentIntent);
 	    }
 	    
 	    /* 
@@ -248,6 +251,7 @@ import java.util.Set;
 
 	    @Override
 	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    	String paypalId;
 	        if (requestCode == REQUEST_CODE_PAYMENT) {
 	            if (resultCode == Activity.RESULT_OK) {
 	                PaymentConfirmation confirm =
@@ -258,8 +262,37 @@ import java.util.Set;
 	                        System.out.println("The below confirmation id to be sent to our service");
 	                        System.out.println("Confirmation: State"+confirm.toJSONObject().getJSONObject("response").getString("state"));
 	                        System.out.println("Confirmation: State"+confirm.toJSONObject().getJSONObject("response").getString("id"));
-	                        
+	                        paypalId =confirm.toJSONObject().getJSONObject("response").getString("id");
+	                        System.out.println("Final Paypal id = "+paypalId);
+	                        Log.i("Raje Paypal payment confirmation  ", paypalId);
+	                        // Call Pradeep's post request here
 	                       
+	            	        //Send post request to Pradeep's service
+	            	       // http://smartcare-services.elasticbeanstalk.com/rest/AdminService/makePayment?patientName=raje2&physicianName=Dr.%20Foo&billedAmount=25.0&paypalConfirmId=xxxxx
+	                       //ADDED HERE
+	                        
+	                      //  RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/AdminService/makePayment?patientName=raje2&physicianName=Dr.%20Foo&billedAmount=billedAmount&paypalConfirmId=paypalId");
+	                        RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/AdminService/makePayment?patientName=raje2&physicianName=Dr.%20Foo&billedAmount=25.0&paypalConfirmId=abcd");
+	            			
+	            			try {
+	            				rsClient.execute(RestClient.RequestMethod.GET);
+	            				String amt = new Double(billedAmount).toString();
+	            				 rsClient.addParam("patientName", patientName);
+	            				 rsClient.addParam("physicianName","Dr. Foo" );
+	            				
+	            				rsClient.addParam("billedAmount", amt);
+	            				rsClient.addParam("paypalId", paypalId);
+	            				
+	            				System.out.println("-------------");
+	            				System.out.println(rsClient.getErrorMessage());
+	            				System.out.println(rsClient.getResponseCode());
+	            				System.out.println(rsClient.getResponse());
+	            				String responseArray =rsClient.getResponse();
+	            				 Log.i("Raje-Restclient", rsClient.getResponse().toString());
+	            			}catch (Exception e) {
+	            				
+	            				
+	            			}
 	                        System.out.println(confirm.toJSONObject().toString(4));
 	                        Log.i("Raje", confirm.getPayment().toJSONObject().toString(4));
 	                        /**
