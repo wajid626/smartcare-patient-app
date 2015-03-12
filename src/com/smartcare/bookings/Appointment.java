@@ -35,7 +35,7 @@ public class Appointment implements Parcelable {
 	@Expose
 	public Date date;
 	
-	public Appointment(Location location, Physician benefit, Date date) {
+	public Appointment(Location location, Physician physician, Date date) {
 		this.location = location;
 		this.physician = physician;
 		this.date = date;

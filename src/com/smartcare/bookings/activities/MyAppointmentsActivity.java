@@ -92,33 +92,26 @@ public class MyAppointmentsActivity extends ActivityBase {
     	rsClient.addParam("patientName", "wajid");
     	try {
 			rsClient.execute(RestClient.RequestMethod.GET);
-			System.out.println("-------------");
-			System.out.println(rsClient.getErrorMessage());
-			System.out.println(rsClient.getResponseCode());
-			System.out.println(rsClient.getResponse());
-			String responseArray =rsClient.getResponse();
-			 Log.i("Raje-Restclient", rsClient.getResponse().toString());
-			 Appointment[] app = new Appointment[10];
-			 
-			 
-			 JSONArray jArray = new JSONArray(rsClient.getResponse().toString());
+			JSONArray jArray = new JSONArray(rsClient.getResponse().toString());
 			 boolean flag=true;
 			 
 			 for (int i=0; i < jArray.length() && flag; i++)
 			 {
 			     try {
-			    	 StringBuffer s = new StringBuffer("Appontment with ");
-						
-			    	 //Parsing the Json array from the service response
+			    	 StringBuffer s = new StringBuffer("");
 			    	 JSONObject json_data = jArray.getJSONObject(i);
 			    	  String physicianName = json_data.getString("PhysicianName");
-			          String appointmentDateTime =  json_data.getString("AppointmentDateTime");
-			          s.append(physicianName);
-			          s.append(" on ");
-			          s.append(appointmentDateTime);
+			          String appointmentDate =  json_data.getString("AppointmentDate");
+			          String appointmentTime =  json_data.getString("AppointmentTime");
+			          String location =  json_data.getString("Location");
+				         
+			          s.append(appointmentDate);
+			          s.append(", ");
+			          s.append(appointmentTime);
 			          s.append(" at ");
-			          s.append("San Jose");
-			          //app[i] = new Appointment(null, null, appointmentDateTime);
+			          s.append(location);
+			          s.append(" with ");
+			          s.append(physicianName.replace("_", "."));
 			          slots.add(s.toString());
 			     } catch (JSONException e) {
 			         // Oops
@@ -130,8 +123,6 @@ public class MyAppointmentsActivity extends ActivityBase {
 			System.out.println("Exception occurred");
 			e.printStackTrace();
 		}
-       // return new PayPalPayment(new BigDecimal("10.75"), "USD", "My medical charges",
-       //         paymentIntent);
-	return slots;
+ 	return slots;
     }
 }
