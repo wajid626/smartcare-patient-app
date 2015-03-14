@@ -53,9 +53,19 @@
         android:text="@string/make_payment">
                 
             </Button>
+            
+        <Button android:id="@+id/heartRateMonitor"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buyItBtn"
+        android:layout_centerHorizontal="true"
+        android:onClick="onBuyPressed"
+        android:text="@string/heartRateMonitor">
+        </Button>    
+            
     <TextView
         android:id="@+id/beaconMsg"
-        android:layout_below="@+id/btnMakePayment"
+        android:layout_below="@+id/heartRateMonitor"
         android:layout_width="wrap_content"
         android:textSize = "20sp"
         android:textColor="#FF0000"

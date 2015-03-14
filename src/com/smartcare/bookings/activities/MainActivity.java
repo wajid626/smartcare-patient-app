@@ -54,7 +54,7 @@ import com.smartcare.bookings.rest.*;
 public class MainActivity extends ActivityBase implements ProximityListener, VisitListener{
 	private final Context context = this;
 	private TextView lblLoggedInAs;
-	private Button btnMyAppointments, btnAvailableAppointments, btnPaypalpayment;
+	private Button btnMyAppointments, btnAvailableAppointments, btnPaypalpayment, btnHeartRateMonitor;
 	private static final String PROXIMITY_APP_ID = "0e7b20b165e3a495d199249915365f28d81a0a0a669f55834759001ebc5a8e91";
     private static final String PROXIMITY_APP_SECRET = "e16659d95bf6dcba77970c0d56a29c0822889d718d4eee630677ef8152939ca4";
     private StringBuffer sb = new StringBuffer();
@@ -104,7 +104,7 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
     	lblLoggedInAs = (TextView) findViewById(R.id.lblLoggedInAs);
     	btnMyAppointments = (Button) findViewById(R.id.btnMyAppointments);
     	btnAvailableAppointments = (Button) findViewById(R.id.btnAvailableAppointments);
-    	//btnPaypalpayment = (Button) findViewById(R.id.btnMakePayment);
+    	btnHeartRateMonitor = (Button) findViewById(R.id.heartRateMonitor);
     }
     
     protected void setUiEventHandlers () {
@@ -122,14 +122,14 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
             	
             }
         });
-    /*	btnPaypalpayment.setOnClickListener(new View.OnClickListener() {
+    	btnHeartRateMonitor.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-        		Intent intent = new Intent(context, PaypalpaymentActivity.class);
+        		Intent intent = new Intent(context, HeartRateMonitorActivity.class);
             	startActivity(intent);
             	
             }
         });
-    */
+    
     }
     
     @Override
@@ -147,10 +147,10 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
           return true;
         case R.id.item2:
          //   Toast.makeText(this, "Option3", Toast.LENGTH_SHORT).show();
-            setContentView(R.layout.activity_heartrate_monitor);
-            Intent inent = new Intent(this, HeartRateMonitorActivity.class);
-            startActivity(inent);
-            return true; 
+         //  setContentView(R.layout.activity_heartrate_monitor);
+         //   Intent inent = new Intent(this, HeartRateMonitorActivity.class);
+         //   startActivity(inent);
+         //   return true; 
         default:
           return super.onOptionsItemSelected(item);
         } 

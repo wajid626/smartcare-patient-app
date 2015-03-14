@@ -44,7 +44,7 @@ public class SelectPhysicianActivity extends ActivityBase {
 
         setPhysiciansVisibility(physicians);
         
-        optSanjose.setChecked(true);
+        optSunnyvale.setChecked(true);
         
     }
 
