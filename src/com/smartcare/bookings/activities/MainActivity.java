@@ -184,6 +184,9 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
 	@Override
 	public void receivedSighting(Visit visit, Date date, Integer rssi) {
 		logMessage("Invoking receivedSighting : " + visit.getTransmitter().getIdentifier() + " Proximity : " + rssi);
+		sb.append("\n checkedin");
+		((TextView)findViewById(R.id.beaconMsg)).setText(sb.toString());
+	
 	}
 
 	@Override
