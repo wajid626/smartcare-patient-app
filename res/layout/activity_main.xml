@@ -15,51 +15,49 @@
 
     <Button
         android:id="@+id/btnMyAppointments"
-        android:layout_width="350dp"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_below="@+id/lblLoggedInAs"
         android:layout_marginTop="50dp"
+        android:background="#75c575"
+        android:drawableLeft="@drawable/myappointments"
         android:text="@string/my_appointments" 	
  />
 
     <Button
         android:id="@+id/btnAvailableAppointments"
-        android:layout_width="350dp"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnMyAppointments"
         android:layout_centerHorizontal="true"
+        android:drawableLeft="@drawable/appointment"
+        android:background="#FF90EE90"
         android:text="@string/available_turns"
          />
-
-   <!--   <Button
-        android:id="@+id/btnMakePayment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnAvailableAppointments"
-        android:layout_centerHorizontal="true"
-        android:text="@string/make_payment" 
-        />-->
-     
             <Button
            android:id="@+id/buyItBtn"
               
-        android:layout_width="350dp"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnAvailableAppointments"
         android:layout_centerHorizontal="true"
         android:onClick="onBuyPressed"
+        android:drawableLeft="@drawable/paypal_button"
+        android:background="#75c575"
         android:text="@string/make_payment">
-                
             </Button>
             
+            
         <Button android:id="@+id/heartRateMonitor"
-        android:layout_width="350dp"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buyItBtn"
         android:layout_centerHorizontal="true"
         android:onClick="onBuyPressed"
+        android:drawableLeft="@drawable/heart"
+        android:background="#FF90EE90"
         android:text="@string/heartRateMonitor">
         </Button>    
             
@@ -73,5 +71,30 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         />
+
+        <ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="invisible"
+    android:src="@drawable/paypal_button"/>
+    
+    <ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="invisible"
+    android:src="@drawable/myappointments"/>
         
+    <ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="invisible"
+    android:src="@drawable/heart"/>
+                        
+    <ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="invisible"
+    android:src="@drawable/appointment"/>
+    
+    
 </RelativeLayout>
