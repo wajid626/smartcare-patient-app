@@ -61,7 +61,7 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
     private  VisitManager visitManager = null;
     private static final String TAG = "paymentExample";
     private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_SANDBOX;
-    public String patientName=null;
+    public String patientName, physicianName;
     double billedAmount=0;
     private static final int REQUEST_CODE_PAYMENT = 1;
     private static final int REQUEST_CODE_FUTURE_PAYMENT = 2;
@@ -205,55 +205,39 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
 	}
 	
 	   public void onBuyPressed(View pressed) {
-		   System.out.println("Buy is pressed ------------");
 	        PayPalPayment thingToBuy = getThingToBuy(PayPalPayment.PAYMENT_INTENT_SALE);
 	        Intent intent = new Intent(MainActivity.this, PaymentActivity.class);
 	        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
 	        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, thingToBuy);
 	        startActivityForResult(intent, REQUEST_CODE_PAYMENT);
-	        //Send post request to Pradeep's service
-	       // http://smartcare-services.elasticbeanstalk.com/rest/AdminService/makePayment?patientName=raje2&physicianName=Dr.%20Foo&billedAmount=25.0&paypalConfirmId=xxxxx
 	    }
 	   
 	    private PayPalPayment getThingToBuy(String paymentIntent) {
 	    	RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/AdminService/findPaymentDetails");
 			try {
 				rsClient.execute(RestClient.RequestMethod.GET);
-				System.out.println("-------------");
-				System.out.println(rsClient.getErrorMessage());
-				System.out.println(rsClient.getResponseCode());
-				System.out.println(rsClient.getResponse());
 				String responseArray =rsClient.getResponse();
-				 Log.i("Raje-Restclient", rsClient.getResponse().toString());
-				 
-				 JSONArray jArray = new JSONArray(rsClient.getResponse().toString());
+				JSONArray jArray = new JSONArray(rsClient.getResponse().toString());
 				 boolean flag=true;
 				 for (int i=0; i < jArray.length() && flag; i++)
 				 {
 				     try {
-				       //Parsing the Json array from the service response
-				    	 JSONObject json_data = jArray.getJSONObject(i);
-				          patientName =  json_data.getString("PatientName");
+				    	JSONObject json_data = jArray.getJSONObject(i);
+				        patientName =  json_data.getString("PatientName");
 				        billedAmount = json_data.getDouble("BilledAmount");
-				       //  patientName = oneObject.getString(patientName);
-				    	
-				    	 System.out.println("First   Billed amount = "+billedAmount);
-						 System.out.println("First   Patient Name = "+patientName);
+				        physicianName = json_data.getString("PhysicianName");
+				      
+				    	 System.out.println("First Billed amount = "+billedAmount);
+						 System.out.println("First Patient Name = "+patientName);
 				     } catch (JSONException e) {
 				         // Oops
 				     }
 				 }
-				
-			 System.out.println("Billed amount = "+billedAmount);
-				 System.out.println("Patient Name = "+patientName);
-						 //toJSONObject().toString(4));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println("Exception occurred");
 				e.printStackTrace();
 			}
-	       // return new PayPalPayment(new BigDecimal("10.75"), "USD", "My medical charges",
-	       //         paymentIntent);
 		return new PayPalPayment(new BigDecimal(billedAmount), "USD", "My medical charges",paymentIntent);
 	    }
 
@@ -284,6 +268,7 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
 	    @Override
 	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    	String paypalId;
+            String amt;
 	        if (requestCode == REQUEST_CODE_PAYMENT) {
 	            if (resultCode == Activity.RESULT_OK) {
 	                PaymentConfirmation confirm =
@@ -296,31 +281,24 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
 	                        System.out.println("Confirmation: State"+confirm.toJSONObject().getJSONObject("response").getString("id"));
 	                        paypalId =confirm.toJSONObject().getJSONObject("response").getString("id");
 	                        System.out.println("Final Paypal id = "+paypalId);
-	                        Log.i("Raje Paypal payment confirmation  ", paypalId);
-	                        // Call Pradeep's post request here
-	                       
-	            	        //Send post request to Pradeep's service
-	            	       // http://smartcare-services.elasticbeanstalk.com/rest/AdminService/makePayment?patientName=raje2&physicianName=Dr.%20Foo&billedAmount=25.0&paypalConfirmId=xxxxx
-	                       //ADDED HERE
-	                        
-	                      //  RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/AdminService/makePayment?patientName=raje2&physicianName=Dr.%20Foo&billedAmount=billedAmount&paypalConfirmId=paypalId");
 	                        RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/AdminService/makePayment?patientName=raje2&physicianName=Dr.%20Foo&billedAmount=25.0&paypalConfirmId=abcd");
 	            			
 	            			try {
-	            				rsClient.execute(RestClient.RequestMethod.GET);
-	            				String amt = new Double(billedAmount).toString();
+	            				System.out.println("Executing GET to send paymentconfirmation");
+	            				 amt = Double.toString(billedAmount);
+	            				 System.out.println("patientName "+patientName);
 	            				 rsClient.addParam("patientName", patientName);
-	            				 rsClient.addParam("physicianName","Dr. Foo" );
-	            				
-	            				rsClient.addParam("billedAmount", amt);
-	            				rsClient.addParam("paypalId", paypalId);
-	            				
-	            				System.out.println("-------------");
+	            				 rsClient.addParam("physicianName", physicianName);
+	            				 System.out.println("physicianName=  "+physicianName);
+	            				 System.out.println("Billed amount = "+billedAmount);
+	            				rsClient.addParam("billedAmount",amt);
+	            				rsClient.addParam("paypalConfirmId", paypalId);
+	            				rsClient.execute(RestClient.RequestMethod.GET);
+	            				System.out.println("Executed GET to send paymentconfirmation");
 	            				System.out.println(rsClient.getErrorMessage());
-	            				System.out.println(rsClient.getResponseCode());
-	            				System.out.println(rsClient.getResponse());
+	            				System.out.println("Response code " +rsClient.getResponseCode());
+	            				//System.out.println(rsClient.getResponse());
 	            				String responseArray =rsClient.getResponse();
-	            				 Log.i("Raje-Restclient", rsClient.getResponse().toString());
 	            			}catch (Exception e) {
 	            				
 	            				
