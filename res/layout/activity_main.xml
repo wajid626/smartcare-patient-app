@@ -61,6 +61,15 @@
         android:text="@string/heartRateMonitor">
         </Button>    
             
+        <Button android:id="@+id/pillReminder"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/heartRateMonitor"
+        android:layout_centerHorizontal="true"
+        android:drawableLeft="@drawable/heart"
+        android:background="#75c575"
+        android:text="@string/pillReminder">
+        </Button> 
     <TextView
         android:id="@+id/beaconMsg"
         android:layout_below="@+id/heartRateMonitor"

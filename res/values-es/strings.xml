@@ -17,5 +17,38 @@
     <string name="chk_payments">Payments via Beacons</string>
     <string name="chk_pacemaker">Enable pacemaker alerts</string>
      <string name="savePreferences">Save</string>
+         <string-array name="homepage">
+        <item>Advil</item>
+        <item>Tylenol</item>
+    </string-array>
+
+    <string name="title_activity_prescriptions">Prescriptions</string>
+    <string name="add">Add Pill</string>
+
+    <string-array name="prescriptions"></string-array>
+  
+    <string name="title_activity_add_prescription">AddPrescription</string>
+    <string name="title_activity_prescriptions_info">PrescriptionsInfo</string>
+    <string name="edit">Edit</string>
+    <string name="title_activity_edit_prescriptions">EditPrescriptions</string>
+    <string name="delete">Delete</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_my_alarm_response">MyAlarmResponse</string>
+    <string name="title_activity_my_google_map">MyGoogleMap</string>
+	<string name="addPrescriptions">Add Prescriptions</string>
+	<string name="editPrescriptions">Edit Prescriptions</string>
+	<string name="infoPrescriptions">Prescription Info</string>
+	<string name="infoNotFilled">Please fill out the information</string>
+	<string name="myPrescriptions">My Prescriptions</string>
+		<string name="schedule">Schedule</string>
+		<string name="pharmacy">Pharmacy</string>
+		<string name="itsTime">Time to take your pill!</string>
+		<string name="taken">Taken</string>
+		<string name="later">Later</string>
+		<string name="noPrescriptions">You have no prescriptions, click the + to add</string>
+	<string name="sureToDelete">Are you sure you want to delete this?</string>
+
+	<string name="cancel">cancel</string>
+     
  
 </resources>

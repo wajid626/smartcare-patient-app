@@ -1,0 +1,130 @@
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_clicked"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:text="Prescription Name"
+            android:textSize="24dp" />
+
+        <EditText
+            android:id="@+id/prescriptionName2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:text="Schedule"
+            android:textSize="24dp"  />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <CheckedTextView
+                android:id="@+id/monday3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:text="Mn"
+                android:textSize="12dp" 
+                android:onClick="mondayClicked"/>
+
+            <CheckedTextView
+                android:id="@+id/tuesday3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:text="Td"
+                android:textSize="12dp"
+                android:onClick="tuesdayClicked"/>
+
+            <CheckedTextView
+                android:id="@+id/wednesday3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:text="Wd" 
+                android:textSize="12dp"
+                android:onClick="wednesdayClicked"/>
+
+            <CheckedTextView
+                android:id="@+id/thursday3"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Th" 
+                android:textSize="12dp"
+                android:onClick="thursdayClicked"/>
+
+            <CheckedTextView
+                android:id="@+id/friday3"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fr" 
+                android:textSize="12dp"
+                android:onClick="fridayClicked"/>
+
+            <CheckedTextView
+                android:id="@+id/saturday3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:text="St"
+                android:textSize="12dp"
+                android:onClick="saturdayClicked" />
+
+            <CheckedTextView
+                android:id="@+id/sunday3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:text="Sn"
+                android:textSize="12dp" 
+                android:onClick="sundayClicked"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:text="Set Time to Take"
+             />
+
+        <Button
+            android:id="@+id/editTimePickerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pick time" 
+    		android:onClick="showTimePickerDialog"/>
+
+        <Button
+            android:id="@+id/EditSaveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onEditSaveClicked"
+            android:text="Save" />
+        
+    </LinearLayout>

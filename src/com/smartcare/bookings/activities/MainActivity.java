@@ -48,13 +48,13 @@ import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
 import com.paypal.android.sdk.payments.ShippingAddress;
-import com.smartcare.bookings.R;
 import com.smartcare.bookings.rest.*;
+import com.smartcare.pillreminder.PillReminderActivity;
 
 public class MainActivity extends ActivityBase implements ProximityListener, VisitListener{
 	private final Context context = this;
 	private TextView lblLoggedInAs;
-	private Button btnMyAppointments, btnAvailableAppointments, btnPaypalpayment, btnHeartRateMonitor;
+	private Button btnMyAppointments, btnAvailableAppointments, btnPaypalpayment, btnHeartRateMonitor, btnPillReminder;
 	private static final String PROXIMITY_APP_ID = "0e7b20b165e3a495d199249915365f28d81a0a0a669f55834759001ebc5a8e91";
     private static final String PROXIMITY_APP_SECRET = "e16659d95bf6dcba77970c0d56a29c0822889d718d4eee630677ef8152939ca4";
     private StringBuffer sb = new StringBuffer();
@@ -105,6 +105,7 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
     	btnMyAppointments = (Button) findViewById(R.id.btnMyAppointments);
     	btnAvailableAppointments = (Button) findViewById(R.id.btnAvailableAppointments);
     	btnHeartRateMonitor = (Button) findViewById(R.id.heartRateMonitor);
+    	btnPillReminder = (Button) findViewById(R.id.pillReminder);
     }
     
     protected void setUiEventHandlers () {
@@ -129,6 +130,14 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
             	
             }
         });
+       	btnPillReminder.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+        		Intent intent = new Intent(context, PillReminderActivity.class);
+            	startActivity(intent);
+            	
+            }
+        });
+    	
     
     }
     

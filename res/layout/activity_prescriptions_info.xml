@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/gradient_clicked">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="Pill"
+        android:layout_gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <View
+ 	 android:layout_width="1dp"
+ 	 android:layout_height="30dp">
+	</View>
+	
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="Schedule"
+        android:layout_gravity="center"
+       />
+    
+    
+     <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center" >
+
+            <CheckedTextView
+                android:id="@+id/monday2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:text="Mn"
+                android:textSize="12dp" 
+                />
+
+            <CheckedTextView
+                android:id="@+id/tuesday2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:text="Td"
+                android:textSize="12dp"/>
+
+            <CheckedTextView
+                android:id="@+id/wednesday2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:text="Wd" 
+                android:textSize="12dp"/>
+
+            <CheckedTextView
+                android:id="@+id/thursday2"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Th" 
+                android:textSize="12dp"/>
+
+            <CheckedTextView
+                android:id="@+id/friday2"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fr" 
+                android:textSize="12dp"/>
+
+            <CheckedTextView
+                android:id="@+id/saturday2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:text="St"
+                android:textSize="12dp" />
+
+            <CheckedTextView
+                android:id="@+id/sunday2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:text="Sn"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+        
+     <View
+ 	 android:layout_width="1dp"
+ 	 android:layout_height="30dp">
+	</View>
+    
+	<TextView
+        android:id="@+id/AlarmTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="Alarm Time"
+        android:layout_gravity="center"
+       />
+     
+    <TextView
+        android:id="@+id/hourMinute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="6:00"
+        android:layout_gravity="center"
+        />
+
+</LinearLayout>

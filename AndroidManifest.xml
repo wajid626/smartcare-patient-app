@@ -14,7 +14,23 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Required to show current location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+ 
+    <!-- Required OpenGL ES 2.0. for Maps V2 -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+    
+            <meta-data
+     android:name="com.google.android.maps.v2.API_KEY"
+     android:value="AIzaSyAhykTjKmlPYxQgS36PkoynFOq92bNqJ0k" />
+        
+        <meta-data
+    android:name="com.google.android.gms.version"
+    android:value="@integer/google_play_services_version" />
 
+    
     <application
         android:name="com.smartcare.bookings.SmartCareBookingsApplication"
         android:icon="@drawable/ic_launcher"
@@ -73,20 +89,47 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        
-        
-       <!--   <activity android:name="com.smartcare.bookings.activities.PaypalpaymentActivity"
+              <activity
+            android:name="com.smartcare.pillreminder.Prescriptions"
+            android:label="@string/title_activity_prescriptions" >
+        </activity>
+        <activity
+            android:name="com.smartcare.pillreminder.AddPrescription"
+            android:label="@string/title_activity_add_prescription" >
+        </activity>
 
-            android:label="@string/make_payment" >
+        <receiver android:name="com.smartcare.pillreminder.AlarmReciever" />
 
-            <intent-filter>
+        <activity
+            android:name="com.smartcare.pillreminder.PrescriptionsInfo"
+            android:label="@string/title_activity_prescriptions_info" >
+        </activity>
+        <activity
+            android:name="com.smartcare.pillreminder.EditPrescriptions"
+            android:label="@string/title_activity_edit_prescriptions" >
+        </activity>
 
-                <action android:name="android.intent.action.MAIN" />
+        <service
+            android:name="com.smartcare.pillreminder.Alarm.MyAlarmService"
+            android:enabled="true" />
 
-            </intent-filter>
+        <receiver android:name="com.smartcare.pillreminder.Alarm.AlarmReceiver" />
 
-        </activity>-->
-                <service
+        <activity
+            android:name="com.smartcare.pillreminder.MyAlarmResponse"
+            android:label="@string/title_activity_my_alarm_response"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name="com.smartcare.pillreminder.MyGoogleMap"
+            android:label="@string/title_activity_my_google_map" >
+        </activity>
+        <activity
+            android:name="com.smartcare.pillreminder.PillReminderActivity"
+            android:label="Pill Reminder" >
+        </activity>
+
+        <service
             android:name="com.gimbal.service.ProximityService" android:exported="false">
             <intent-filter>
                 <action android:name="com.example.proximityapp" />
