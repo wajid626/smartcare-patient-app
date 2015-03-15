@@ -55,7 +55,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/buyItBtn"
         android:layout_centerHorizontal="true"
-        android:onClick="onBuyPressed"
         android:drawableLeft="@drawable/heart"
         android:background="#FF90EE90"
         android:text="@string/heartRateMonitor">

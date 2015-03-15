@@ -182,8 +182,7 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
 		logMessage("Invoking didArrive - Beacon ID : " + visit.getTransmitter().getIdentifier()  + " [xxx]");
 		//sb.append("\nBeacon  : Wajid-" +   visit.getTransmitter().getIdentifier());
 		((TextView)findViewById(R.id.beaconMsg)).setText("".toString());
-		sb.append("\n checkedin");
-		((TextView)findViewById(R.id.beaconMsg)).setText(sb.toString());
+	
 	}
 
 	@Override
@@ -194,14 +193,15 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
 	@Override
 	public void receivedSighting(Visit visit, Date date, Integer rssi) {
 		logMessage("Invoking receivedSighting : " + visit.getTransmitter().getIdentifier() + " Proximity : " + rssi);
-		sb.append("\n checkedin");
-		((TextView)findViewById(R.id.beaconMsg)).setText(sb.toString());
-    	RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/UserService/patientCheckIn");
+		RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/UserService/patientCheckIn");
 
 			rsClient.addParam("patientName", "wajid");
 			rsClient.addParam("location", "SanJose") ;
 			try {
 				if (!checkInStatus) {
+				sb.append("\n checkedin");
+				((TextView)findViewById(R.id.beaconMsg)).setText(sb.toString());
+			    
 				rsClient.execute(RestClient.RequestMethod.GET);
 				System.out.println("-------------");
 				System.out.println(rsClient.getErrorMessage());
