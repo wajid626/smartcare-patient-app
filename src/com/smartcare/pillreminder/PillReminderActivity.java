@@ -36,7 +36,7 @@ public class PillReminderActivity extends Activity {
 	};
 
 	// Set images of the listview
-	Integer[] imageId = { R.drawable.ic_launcher, R.drawable.ic_schedule,
+	Integer[] imageId = { R.drawable.myprescriptions, R.drawable.ic_schedule,
 			R.drawable.ic_pharmacy, };
 
 	/**

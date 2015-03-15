@@ -10,8 +10,7 @@
         android:layout_toRightOf="@+id/icon"
         android:gravity="center_vertical"
         android:textSize="15sp"
-        android:textStyle="bold"
-	></TextView>
+  ></TextView>
     
     <TextView
         android:id="@+id/timeTextView"
@@ -30,7 +29,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:contentDescription="TODO"
-        android:src="@drawable/ic_launcher" 
+        
         />
 
 </RelativeLayout>

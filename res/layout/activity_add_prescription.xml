@@ -10,7 +10,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
             android:text="Prescription Name"
             android:textSize="24dp" />
 
@@ -24,7 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
             android:text="Schedule"
             android:textSize="24dp"  />
 
@@ -110,7 +108,6 @@
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
             android:textSize="22dp"
-            android:textStyle="bold"
             android:text="Set Time to Take"
              />
 
