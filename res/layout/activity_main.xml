@@ -15,7 +15,7 @@
 
     <Button
         android:id="@+id/btnMyAppointments"
-        android:layout_width="330dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -28,7 +28,7 @@
 
     <Button
         android:id="@+id/btnAvailableAppointments"
-        android:layout_width="330dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnMyAppointments"
         android:layout_centerHorizontal="true"
@@ -39,7 +39,7 @@
             <Button
            android:id="@+id/buyItBtn"
               
-        android:layout_width="330dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnAvailableAppointments"
         android:layout_centerHorizontal="true"
@@ -51,7 +51,7 @@
             
             
         <Button android:id="@+id/heartRateMonitor"
-        android:layout_width="330dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buyItBtn"
         android:layout_centerHorizontal="true"
@@ -62,11 +62,11 @@
         </Button>    
             
         <Button android:id="@+id/pillReminder"
-        android:layout_width="330dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/heartRateMonitor"
         android:layout_centerHorizontal="true"
-        android:drawableLeft="@drawable/heart"
+        android:drawableLeft="@drawable/pills"
         android:background="#75c575"
         android:text="@string/pillReminder">
         </Button> 
@@ -104,6 +104,12 @@
     android:layout_height="wrap_content"
     android:visibility="invisible"
     android:src="@drawable/appointment"/>
+    
+        <ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="invisible"
+    android:src="@drawable/pills"/>
     
     
 </RelativeLayout>
