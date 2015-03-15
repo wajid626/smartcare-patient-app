@@ -31,12 +31,12 @@ public class PillReminderActivity extends Activity {
 
 	// Set the titles of the listview
 	ListView list;
-	String[] items = { "My Prescriptions", "Schedule", "Pharmacy",
+	String[] items = { "My Prescriptions", "Pharmacy",
 
 	};
 
 	// Set images of the listview
-	Integer[] imageId = { R.drawable.myprescriptions, R.drawable.ic_schedule,
+	Integer[] imageId = { R.drawable.myprescriptions,
 			R.drawable.ic_pharmacy, };
 
 	/**
