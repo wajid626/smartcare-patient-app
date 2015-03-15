@@ -67,7 +67,7 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
     private static final int REQUEST_CODE_FUTURE_PAYMENT = 2;
     private static final int REQUEST_CODE_PROFILE_SHARING = 3;
     private static final String CONFIG_CLIENT_ID ="AfSxvU77TJyalxLi9n28h-EQRY9YpBX5DqzJlkLnItQBKJtfkExnHtPvkEHa728-Trw-ffpnuCKjokmq";
-
+    private static boolean checkInStatus = false;
 
     private static PayPalConfiguration config = new PayPalConfiguration()
             .environment(CONFIG_ENVIRONMENT)
@@ -172,6 +172,7 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
 	public void didArrive(Visit visit) {
 		logMessage("Invoking didArrive - Beacon ID : " + visit.getTransmitter().getIdentifier()  + " [xxx]");
 		//sb.append("\nBeacon  : Wajid-" +   visit.getTransmitter().getIdentifier());
+		((TextView)findViewById(R.id.beaconMsg)).setText("".toString());
 		sb.append("\n checkedin");
 		((TextView)findViewById(R.id.beaconMsg)).setText(sb.toString());
 	}
@@ -186,6 +187,24 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
 		logMessage("Invoking receivedSighting : " + visit.getTransmitter().getIdentifier() + " Proximity : " + rssi);
 		sb.append("\n checkedin");
 		((TextView)findViewById(R.id.beaconMsg)).setText(sb.toString());
+    	RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/UserService/patientCheckIn");
+
+			rsClient.addParam("patientName", "wajid");
+			rsClient.addParam("location", "SanJose") ;
+			try {
+				if (!checkInStatus) {
+				rsClient.execute(RestClient.RequestMethod.GET);
+				System.out.println("-------------");
+				System.out.println(rsClient.getErrorMessage());
+				System.out.println(rsClient.getResponseCode());
+				checkInStatus = true;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("Exception occurred");
+				e.printStackTrace();
+			}
+
 	
 	}
 
@@ -288,12 +307,12 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
 	            			
 	            			try {
 	            				System.out.println("Executing GET to send paymentconfirmation");
-	            				 amt = Double.toString(billedAmount);
-	            				 System.out.println("patientName "+patientName);
-	            				 rsClient.addParam("patientName", patientName);
-	            				 rsClient.addParam("physicianName", physicianName);
-	            				 System.out.println("physicianName=  "+physicianName);
-	            				 System.out.println("Billed amount = "+billedAmount);
+	            				amt = Double.toString(billedAmount);
+	            				System.out.println("patientName "+patientName);
+	            				rsClient.addParam("patientName", patientName);
+	            				rsClient.addParam("physicianName", physicianName);
+	            				System.out.println("physicianName=  "+physicianName);
+	            				System.out.println("Billed amount = "+billedAmount);
 	            				rsClient.addParam("billedAmount",amt);
 	            				rsClient.addParam("paypalConfirmId", paypalId);
 	            				rsClient.execute(RestClient.RequestMethod.GET);

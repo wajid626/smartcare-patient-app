@@ -30,12 +30,6 @@ public class NewConnectedListener extends ConnectListenerImpl
 	}
 	public void Connected(ConnectedEvent<BTClient> eventArgs) {
 		System.out.println(String.format("Connected to BioHarness %s.", eventArgs.getSource().getDevice().getName()));
-
-	
-		
-		
-		
-		
 		//Creates a new ZephyrProtocol object and passes it the BTComms object
 		ZephyrProtocol _protocol = new ZephyrProtocol(eventArgs.getSource().getComms());
 		//ZephyrProtocol _protocol = new ZephyrProtocol(eventArgs.getSource().getComms(), );
