@@ -34,8 +34,8 @@ public class PreferencesActivity extends Activity {
 			public void onClick(View v) {
 
 				if (((CheckBox) v).isChecked()) {
-					Toast.makeText(PreferencesActivity.this,
-							"Bro, try Android :)", Toast.LENGTH_LONG).show();
+					//Toast.makeText(PreferencesActivity.this,
+					//		"Bro, try Android :)", Toast.LENGTH_LONG).show();
 				}
 
 			}
