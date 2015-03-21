@@ -21,7 +21,7 @@ public class SignInActivity extends ActivityBase {
         setContentView(R.layout.activity_sign_in);
         super.onCreate(savedInstanceState);
         
-        String username = getPreferences(MODE_PRIVATE).getString("username", "wajid");
+        String username = getPreferences(MODE_PRIVATE).getString("username", "Wajid");
         txtUsername.setText(username);
 		
     }
@@ -40,7 +40,7 @@ public class SignInActivity extends ActivityBase {
             	
             	// TODO: Validate username & password w/ rest service
             	
-            	if (username.equalsIgnoreCase("wajid") && password.equalsIgnoreCase("123")) {
+            	if (username.equalsIgnoreCase("Wajid") && password.equalsIgnoreCase("123")) {
             		// Save username as default, for next sessions
             		SharedPreferences.Editor prefEditor = getPreferences(MODE_PRIVATE).edit() ;
             		prefEditor.putString("username", username);

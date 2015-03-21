@@ -102,7 +102,7 @@ public class SelectAppointmentTimeActivity extends ActivityBase {
     	String timeString = sdf2.format(appointment.date); 
     	
       	rsClient.addParam("physicianName", appointment.physician.name());
-      	rsClient.addParam("patientName", "wajid");
+      	rsClient.addParam("patientName", "Wajid");
     	rsClient.addParam("location", appointment.location.toString());
     	rsClient.addParam("appointmentDate", dateString);
     	rsClient.addParam("appointmentTime", timeString);

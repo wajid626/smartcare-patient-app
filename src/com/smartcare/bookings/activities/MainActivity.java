@@ -14,6 +14,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -34,6 +35,8 @@ import com.gimbal.proximity.ProximityOptions;
 import com.gimbal.proximity.Visit;
 import com.gimbal.proximity.VisitListener;
 import com.gimbal.proximity.VisitManager;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.smartcare.bookings.R;
 import com.smartcare.bookings.SmartCareBookingsApplication;
 import com.paypal.android.sdk.payments.PayPalAuthorization;
@@ -50,6 +53,8 @@ import com.paypal.android.sdk.payments.PaymentConfirmation;
 import com.paypal.android.sdk.payments.ShippingAddress;
 import com.smartcare.bookings.rest.*;
 import com.smartcare.pillreminder.PillReminderActivity;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends ActivityBase implements ProximityListener, VisitListener{
 	private final Context context = this;
@@ -68,6 +73,7 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
     private static final int REQUEST_CODE_PROFILE_SHARING = 3;
     private static final String CONFIG_CLIENT_ID ="AfSxvU77TJyalxLi9n28h-EQRY9YpBX5DqzJlkLnItQBKJtfkExnHtPvkEHa728-Trw-ffpnuCKjokmq";
     private static boolean checkInStatus = false;
+	TextView txtPassword;
 
     private static PayPalConfiguration config = new PayPalConfiguration()
             .environment(CONFIG_ENVIRONMENT)
@@ -106,6 +112,13 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
     	btnAvailableAppointments = (Button) findViewById(R.id.btnAvailableAppointments);
     	btnHeartRateMonitor = (Button) findViewById(R.id.heartRateMonitor);
     	btnPillReminder = (Button) findViewById(R.id.pillReminder);
+	    txtPassword = (TextView) findViewById(R.id.txtPassword);
+	    AdView mAdView = (AdView) findViewById(R.id.adView);
+	    AdRequest adRequest = new AdRequest.Builder().build();
+	    mAdView.loadAd(adRequest);
+	    mAdView.setBackgroundColor(Color.TRANSPARENT);
+
+
     }
     
     protected void setUiEventHandlers () {
@@ -195,7 +208,7 @@ public class MainActivity extends ActivityBase implements ProximityListener, Vis
 		logMessage("Invoking receivedSighting : " + visit.getTransmitter().getIdentifier() + " Proximity : " + rssi);
 		RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/UserService/patientCheckIn");
 
-			rsClient.addParam("patientName", "wajid");
+			rsClient.addParam("patientName", "Wajid");
 			rsClient.addParam("location", "SanJose") ;
 			try {
 				if (!checkInStatus) {

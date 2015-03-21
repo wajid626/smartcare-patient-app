@@ -89,7 +89,7 @@ public class MyAppointmentsActivity extends ActivityBase {
     private List<String> getAppointments(String patientName) {
     	RestClient rsClient = new RestClient("http://smartcare-services.elasticbeanstalk.com/rest/AdminService/getAppointmentDetails");
     	List<String> slots = new ArrayList<String>();
-    	rsClient.addParam("patientName", "wajid");
+    	rsClient.addParam("patientName", "Wajid");
     	try {
 			rsClient.execute(RestClient.RequestMethod.GET);
 			JSONArray jArray = new JSONArray(rsClient.getResponse().toString());
